@@ -43,4 +43,10 @@ class LoginController {
       res.send("Incorrect login details");
     }
   }
+
+  @get("/logout")
+  getLogout(req: Request, res: Response) {
+    req.session = undefined;
+    res.redirect("/");
+  }
 }

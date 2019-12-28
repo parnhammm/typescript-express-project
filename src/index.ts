@@ -1,15 +1,14 @@
-import express, { Request, Response } from "express";
-import { router } from "./Routes/loginRoutes";
+import express from "express";
 import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
 import "./Controllers/LoginController";
+import "./Controllers/RootController";
 import { AppRouter } from "./AppRouter";
 
 const app = express();
 
 app.use(cookieSession({ keys: ["someRandomKey"] }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(router);
 app.use(AppRouter.getInstance());
 
 app.listen(3000, () => {
