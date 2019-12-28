@@ -18,20 +18,7 @@ const router = Router();
 
 
 
-router.post("/login", (req: RequestWithBody, res: Response) => {
-  const { email, password } = req.body;
 
-  if (email && password) {
-    if (email === "temp@temp.com" && password === "password") {
-      req.session = { loggedIn: true };
-      res.redirect("/");
-    } else {
-      res.send("Incorrect login details");
-    }
-  } else {
-    res.send("Invalid form submitted");
-  }
-});
 
 router.get("/", (req: Request, res: Response) => {
   if (req.session && req.session.loggedIn) {

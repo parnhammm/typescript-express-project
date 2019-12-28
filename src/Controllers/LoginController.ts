@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { get } from "./Decorators/routes";
+import { get, post } from "./Decorators/routes";
 import { controller } from "./Decorators/controller";
 import { use } from "./Decorators/use";
+import { bodyValidator } from "./Decorators/bodyValidator";
 
 //Test middleware
 function logger(req: Request, res: Response, next: NextFunction) {
@@ -28,5 +29,18 @@ class LoginController {
         <button>Submit</button>
       </form>
     `);
+  }
+
+  @post("/login")
+  @bodyValidator("email", "password")
+  postLogin(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    if (email === "temp@temp.com" && password === "password") {
+      req.session = { loggedIn: true };
+      res.redirect("/");
+    } else {
+      res.send("Incorrect login details");
+    }
   }
 }
