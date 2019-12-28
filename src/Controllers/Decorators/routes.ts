@@ -1,11 +1,12 @@
 import "reflect-metadata";
-import {Methods} from "./Methods";
+import {Methods} from "./Enums/Methods";
+import {MetadataKeys} from "./Enums/MetadataKeys"
 
 function routerBinder(method: string) {
   return function(path: string) {
     return function(target: any, key: string, desc: PropertyDescriptor) {
-      Reflect.defineMetadata("path", path, target, key);
-      Reflect.defineMetadata("method", method, target, key);
+      Reflect.defineMetadata(MetadataKeys.Path, path, target, key);
+      Reflect.defineMetadata(MetadataKeys.Method, method, target, key);
     };
   };
 }
